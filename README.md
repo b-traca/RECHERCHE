@@ -1,2 +1,0 @@
-# RECHERCHE
-Site Recherche
