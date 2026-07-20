@@ -1,0 +1,25 @@
+---
+layout: default
+title: Accueil
+---
+
+<div class="home">
+  <h1>Recherche</h1>
+  <p class="intro">
+    Notes, projets, cas d'étude et théories autour de l'architecture,
+    de la fabrication et des technologies numériques.
+  </p>
+
+  <div class="posts">
+    {% for post in site.posts %}
+      <article class="post-card">
+        <p class="post-meta">{{ post.date | date: "%d.%m.%Y" }}</p>
+        <h2>
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </h2>
+        <p>{{ post.excerpt | strip_html | truncate: 180 }}</p>
+        <a class="read-more" href="{{ post.url | relative_url }}">Lire l'article →</a>
+      </article>
+    {% endfor %}
+  </div>
+</div>

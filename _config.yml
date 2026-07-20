@@ -1,0 +1,12 @@
+title: Recherche
+description: Blog de recherche en architecture
+baseurl: "/RECHERCHE"
+url: "https://b-traca.github.io"
+
+markdown: kramdown
+permalink: /:categories/:title/
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
