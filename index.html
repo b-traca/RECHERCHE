@@ -2,42 +2,86 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Recherche</title>
+  <title>Recherche</title>
 
-    <link rel="stylesheet" href="style.css">
+  <style>
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    #container {
+      width: 100%;
+      height: 100vh;
+      background: #f5f5f5;
+    }
+  </style>
 </head>
 
 <body>
 
-    <div id="container"></div>
+  <div id="container"></div>
 
-    <aside id="article-panel">
+  <!-- Graphology -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/graphology/0.25.4/graphology.umd.min.js"></script>
 
-        <button id="close-button">×</button>
+  <!-- Sigma.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/2.4.0/sigma.min.js"></script>
 
-        <h1 id="article-title"></h1>
+  <script>
 
-        <div id="article-content"></div>
-
-    </aside>
-
-
-    <!-- Graphology -->
-
-    <script src="https://unpkg.com/graphology@0.25.4/dist/graphology.umd.min.js"></script>
+    // Création du graphe
+    const graph = new graphology.Graph();
 
 
-    <!-- Sigma.js -->
+    // 1. PROJET
+    graph.addNode("projet", {
+      label: "PROJET",
+      x: 0,
+      y: 1,
+      size: 20,
+      color: "#000000"
+    });
 
-    <script src="https://unpkg.com/sigma@3.0.0-beta.24/dist/sigma.min.js"></script>
+
+    // 2. CAS D'ÉTUDE
+    graph.addNode("cas-etude", {
+      label: "CAS D'ÉTUDE",
+      x: -1,
+      y: -1,
+      size: 20,
+      color: "#555555"
+    });
 
 
-    <!-- Ton JavaScript -->
+    // 3. THÉORIE
+    graph.addNode("theorie", {
+      label: "THÉORIE",
+      x: 1,
+      y: -1,
+      size: 20,
+      color: "#999999"
+    });
 
-    <script src="script.js"></script>
+
+    // Relations
+    graph.addEdge("projet", "cas-etude");
+    graph.addEdge("cas-etude", "theorie");
+    graph.addEdge("theorie", "projet");
+
+
+    // Affichage du graphe
+    const renderer = new Sigma(
+      graph,
+      document.getElementById("container")
+    );
+
+  </script>
 
 </body>
 
