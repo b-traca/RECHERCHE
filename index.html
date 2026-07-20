@@ -1,45 +1,42 @@
 <!DOCTYPE html>
-<html lang="fr">
 
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Recherche</title>
+  <title>RECHERCHE</title>
 
   <style>
-    html,
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
       width: 100%;
       height: 100%;
+      overflow: hidden;
     }
 
     #container {
       width: 100%;
-      height: 100vh;
-      background: #f5f5f5;
+      height: 100%;
+      background: #f2f2f2;
     }
   </style>
+
 </head>
 
 <body>
 
   <div id="container"></div>
 
-  <!-- Graphology -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/graphology/0.25.4/graphology.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/graphology@0.25.4/dist/graphology.umd.min.js"></script>
 
-  <!-- Sigma.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/2.4.0/sigma.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sigma@2.4.0/build/sigma.min.js"></script>
 
   <script>
 
-    // Création du graphe
     const graph = new graphology.Graph();
 
-
-    // 1. PROJET
     graph.addNode("projet", {
       label: "PROJET",
       x: 0,
@@ -48,8 +45,6 @@
       color: "#000000"
     });
 
-
-    // 2. CAS D'ÉTUDE
     graph.addNode("cas-etude", {
       label: "CAS D'ÉTUDE",
       x: -1,
@@ -58,8 +53,6 @@
       color: "#555555"
     });
 
-
-    // 3. THÉORIE
     graph.addNode("theorie", {
       label: "THÉORIE",
       x: 1,
@@ -68,14 +61,10 @@
       color: "#999999"
     });
 
-
-    // Relations
     graph.addEdge("projet", "cas-etude");
     graph.addEdge("cas-etude", "theorie");
     graph.addEdge("theorie", "projet");
 
-
-    // Affichage du graphe
     const renderer = new Sigma(
       graph,
       document.getElementById("container")
@@ -84,5 +73,4 @@
   </script>
 
 </body>
-
 </html>
