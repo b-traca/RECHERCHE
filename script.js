@@ -1,120 +1,205 @@
+// Création du graphe
+
 const graph = new graphology.Graph();
 
-// NŒUDS
 
-graph.addNode("architecture", {
-    label: "Architecture",
+// ============================
+// NŒUD 1 : PROJET
+// ============================
+
+graph.addNode("projet", {
+
+    label: "PROJET",
+
     x: 0,
-    y: 0,
-    size: 20,
+
+    y: 1,
+
+    size: 25,
+
     color: "#000000",
 
-    title: "Architecture",
-    content: `
-        <p>
-        L'architecture comme pratique de conception,
-        de fabrication et d'organisation de l'espace.
-        </p>
-    `
-});
-
-graph.addNode("architecture-4-0", {
-    label: "Architecture 4.0",
-    x: 1,
-    y: 1,
-    size: 15,
-    color: "#555555",
-
     title: "Architecture 4.0",
+
     content: `
+
         <p>
-        La transformation de la fabrication architecturale
-        par les technologies numériques.
+        <strong>Architecture 4.0</strong>
         </p>
+
+        <p>
+        Ce projet de recherche explore la transformation
+        de la fabrication architecturale par les technologies
+        numériques.
+        </p>
+
+        <p>
+        L'architecte n'est plus uniquement l'auteur d'un objet.
+        Il devient également un médiateur, un organisateur
+        et un facilitateur de processus de conception.
+        </p>
+
     `
+
 });
 
-graph.addNode("meshwork", {
-    label: "Meshwork",
+
+// ============================
+// NŒUD 2 : CAS D'ÉTUDE
+// ============================
+
+graph.addNode("cas-etude", {
+
+    label: "CAS D'ÉTUDE",
+
     x: -1,
-    y: 1,
-    size: 15,
-    color: "#555555",
 
-    title: "Meshwork",
-    content: `
-        <p>
-        Le concept de Tim Ingold décrivant un monde
-        constitué de lignes et de relations.
-        </p>
-    `
-});
-
-graph.addNode("wikis-house", {
-    label: "WikiHouse",
-    x: 0,
     y: -1,
-    size: 15,
+
+    size: 20,
+
     color: "#555555",
 
     title: "WikiHouse",
+
     content: `
+
         <p>
-        Un système de construction open source
-        fondé sur la fabrication numérique.
+        <strong>WikiHouse</strong>
         </p>
+
+        <p>
+        WikiHouse constitue un cas d'étude important
+        pour comprendre la transformation des modes
+        de conception et de fabrication architecturale.
+        </p>
+
+        <p>
+        Le projet explore la possibilité de partager,
+        modifier et fabriquer des systèmes constructifs
+        à partir de modèles numériques.
+        </p>
+
     `
+
 });
 
-// RELATIONS
 
-graph.addEdge("architecture", "architecture-4-0");
+// ============================
+// NŒUD 3 : THÉORIE
+// ============================
 
-graph.addEdge("architecture", "meshwork");
+graph.addNode("theorie", {
 
-graph.addEdge("architecture", "wikis-house");
+    label: "THÉORIE",
+
+    x: 1,
+
+    y: -1,
+
+    size: 20,
+
+    color: "#999999",
+
+    title: "Meshwork",
+
+    content: `
+
+        <p>
+        <strong>Meshwork — Tim Ingold</strong>
+        </p>
+
+        <p>
+        Le concept de meshwork décrit un monde constitué
+        de lignes, de trajectoires et de relations.
+        </p>
+
+        <p>
+        Cette approche permet de penser les relations
+        entre les individus, les objets, les techniques
+        et les environnements comme des processus continus.
+        </p>
+
+    `
+
+});
 
 
+// ============================
+// RELATIONS ENTRE LES 3 NŒUDS
+// ============================
+
+graph.addEdge("projet", "cas-etude");
+
+graph.addEdge("cas-etude", "theorie");
+
+graph.addEdge("theorie", "projet");
+
+
+// ============================
 // AFFICHAGE DU GRAPHE
+// ============================
 
 const renderer = new Sigma(
+
     graph,
+
     document.getElementById("container")
+
 );
 
 
+// ============================
 // CLIC SUR UN NŒUD
+// ============================
 
 renderer.on("clickNode", ({ node }) => {
 
-    const data = graph.getNodeAttributes(node);
 
-    document.getElementById("title").innerHTML =
-        data.title;
+    const data =
+        graph.getNodeAttributes(node);
 
-    document.getElementById("content").innerHTML =
-        data.content;
 
-    document.getElementById("panel").style.display =
-        "block";
+    document.getElementById("article-title")
+        .innerHTML = data.title;
 
-    // Change la couleur du nœud visité
+
+    document.getElementById("article-content")
+        .innerHTML = data.content;
+
+
+    document.getElementById("article-panel")
+        .style.display = "block";
+
+
+    // Le nœud devient gris après consultation
 
     graph.setNodeAttribute(
+
         node,
+
         "color",
-        "#999999"
+
+        "#cccccc"
+
     );
 
+
     renderer.refresh();
+
 });
 
 
-// FERMER LE PANNEAU
+// ============================
+// FERMER L'ARTICLE
+// ============================
 
-document.getElementById("close").onclick = () => {
+document.getElementById("close-button")
+    .addEventListener("click", () => {
 
-    document.getElementById("panel").style.display =
-        "none";
 
-};
+        document.getElementById("article-panel")
+            .style.display = "none";
+
+
+    });
